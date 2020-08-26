@@ -28,6 +28,7 @@ Dev Notes:
 - All styling must be done using styled component
 - Try and stick to the styling guide lines
 - Create a clone of the base branch and push that to your GitHub account 
+- The Repo should be private  yourName-social-camera eg (emurphy-social-camera)
 - Branch out of the clone (feature/snapshot)
 - When done or need more information, send the pull request URL to emurphy@girbil.com
 
