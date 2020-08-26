@@ -20,7 +20,7 @@ Implementation Details:
 3. The S3 path should be bucket/yourName/randomUUID/avatar.jpg
 4. Use that PresignedURL to upload the snapshot to your AWS s3 bucket
 5. Update the client app with the s3 link
-6. Allow users save the created snapshot
+6. Allow users to save the created snapshot
 7. Testing is not required but a plus
 
 Dev Notes:
