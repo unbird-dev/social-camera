@@ -10,7 +10,7 @@ const Profile = () => (
     <Flex>
       <Wrapper>
         <Camera>
-          uploaded snapshot shows here
+          Webcam stream shows here
         </Camera>
         <Button className="primary">Take shot</Button>
       </Wrapper>
