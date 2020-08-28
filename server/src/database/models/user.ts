@@ -1,6 +1,6 @@
-import Sequelize, { Model, Optional } from "sequelize";
-import bcrypt from "bcrypt";
-import { sequelize } from "src/database/engine";
+import Sequelize, { Model, Optional } from 'sequelize';
+import bcrypt from 'bcrypt';
+import { sequelize } from 'src/database/engine';
 
 interface UserAttributes {
   id: number;
@@ -22,10 +22,7 @@ class User
   }
 
   async setPassword(password: string) {
-    this.hashedPassword = await bcrypt.hash(
-      password,
-      process.env.SALT_ROUNDS!
-    );
+    this.hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS!);
   }
 
   public readonly createdAt!: Date;
@@ -36,30 +33,31 @@ class User
   }
 }
 
-User.init(
-  {
-    id: {
-      autoIncrement: true,
-      primaryKey: true,
-      type: Sequelize.INTEGER.UNSIGNED,
-      unique: true
-    },
-    latestImage: {
-      type: Sequelize.STRING(256),
-      allowNull: true
-    },
-    hashedPassword: {
-      type: Sequelize.STRING(128),
-      allowNull: false
-    },
-    name: {
-      unique: true,
-      type: Sequelize.STRING(128),
-      allowNull: false
-    }
+export const userAttributes = {
+  id: {
+    autoIncrement: true,
+    primaryKey: true,
+    type: Sequelize.INTEGER.UNSIGNED,
+    unique: true
   },
-  {
-    tableName: 'users',
-    sequelize
+  latestImage: {
+    type: Sequelize.STRING(256),
+    allowNull: true
+  },
+  hashedPassword: {
+    type: Sequelize.STRING(128),
+    allowNull: false
+  },
+  name: {
+    unique: true,
+    type: Sequelize.STRING(128),
+    allowNull: false
   }
-);
+};
+
+export const userTableName = 'users';
+
+User.init(userAttributes, {
+  tableName: userTableName,
+  sequelize
+});
