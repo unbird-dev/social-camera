@@ -4,6 +4,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "esModuleInterop": true,
+    "experimentalDecorators": true,
     "downlevelIteration": true,
     "module": "commonjs",
     "paths": {
