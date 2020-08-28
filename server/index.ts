@@ -1,8 +1,7 @@
-import express from 'express';
 import {createServer} from "http";
+import app from "src/server";
 
-const app = express();
-const server = createServer(app);
+const index = createServer(app);
 
 
 app.get('/get-presigned-url', (req, res) => {
@@ -13,8 +12,8 @@ app.get('/get-presigned-url', (req, res) => {
 
 const port = 3000;
 
-server.listen(port);
+index.listen(port);
 
-server.on('listening', () => {
+index.on('listening', () => {
   console.info(`🚀server is running on port ${port}  ✊🏾✊🏾✊🏾`);
 });

@@ -3,9 +3,9 @@
 
 ## RUN
  - cd into app folder and  run `yarn start`
- - cd into server folder and  run `yarn start`
+ - cd into index folder and  run `yarn start`
  - client  runs on  http://localhost:1234
- - server  runs on  http://localhost:3000
+ - index  runs on  http://localhost:3000
 
 ## ISSUE TO COMPLETE
 
@@ -16,7 +16,7 @@ Given I’m a user, I want to be able to access my system camera, take a snapsho
 Implementation Details:
 
 1. Clone the Social Camera repo. 
-2. Using s3 When user snapshot is created, you want to make a call to the server to generate a PresignedURL
+2. Using s3 When user snapshot is created, you want to make a call to the index to generate a PresignedURL
 3. The S3 path should be bucket/yourName/randomUUID/avatar.jpg
 4. Use that PresignedURL to upload the snapshot to your AWS s3 bucket
 5. Update the client app with the s3 link
