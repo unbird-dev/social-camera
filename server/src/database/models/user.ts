@@ -1,11 +1,11 @@
-import Sequelize, { Model, Optional } from 'sequelize';
-import bcrypt from 'bcrypt';
-import { sequelize } from 'src/database/engine';
+import Sequelize, { Model, Optional } from "sequelize";
+import bcrypt from "bcrypt";
+import { sequelize } from "src/database/engine";
 
 interface UserAttributes {
   id: number;
   name: string;
-  password: string;
+  hashedPassword: string;
   latestImage: string;
 }
 
@@ -14,23 +14,25 @@ class User
   implements UserAttributes {
   id!: number;
   name!: string;
-  private password!: string;
+  hashedPassword!: string;
   latestImage!: string;
 
-  get hashedPassword() {
-    return this.password;
+  get password() {
+    return this.hashedPassword;
   }
 
-  set hashedPassword(unencryptedPassword: string) {
-    // TODO: Encrypt using Bcrypt.
-    this.password = unencryptedPassword;
+  async setPassword(password: string) {
+    this.hashedPassword = await bcrypt.hash(
+      password,
+      process.env.SALT_ROUNDS!
+    );
   }
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
-  isValidPassword(password: string): boolean {
-    return bcrypt.compare(this.password, password);
+  async isValidPassword(password: string): Promise<boolean> {
+    return await bcrypt.compare(this.password, password);
   }
 }
 
@@ -46,7 +48,7 @@ User.init(
       type: Sequelize.STRING(256),
       allowNull: true
     },
-    password: {
+    hashedPassword: {
       type: Sequelize.STRING(128),
       allowNull: false
     },
@@ -61,4 +63,3 @@ User.init(
     sequelize
   }
 );
-
