@@ -7,7 +7,8 @@
     "downlevelIteration": true,
     "module": "commonjs",
     "paths": {
-      "src/*": ["src/*"]
+      "src/*": ["src/*"],
+      "routes/*": ["src/routes/*"]
     },
     "sourceMap": false,
     "strict": true,

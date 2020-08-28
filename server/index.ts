@@ -1,12 +1,10 @@
 import { createServer } from 'http';
+import getPresignedUrl from "routes/getPresignedUrl";
 import app from 'src/server';
 
 const index = createServer(app);
 
-app.get('/get-presigned-url', (req, res) => {
-  //  implement fetching of presigned url
-  res.status(200).send('all good');
-});
+app.get('/get-presigned-url', getPresignedUrl);
 
 const port = process.env.PORT;
 
