@@ -10,6 +10,7 @@
     "bcrypt": "^5.0.0",
     "dotenv-cli": "^3.2.0",
     "express": "^4.17.1",
+    "pg": "^8.3.3",
     "sequelize": "^6.3.4"
   },
   "devDependencies": {
@@ -34,7 +35,10 @@
   "scripts": {
     "start:dev": "dotenv -e .env -- ts-node -r tsconfig-paths/register index.ts",
     "lint": "eslint . --ext .ts",
-    "test": "jest"
+    "test": "jest",
+    "migrate": "dotenv -e .env -- ts-node -r tsconfig-paths/register --project ./tsconfig.json ./src/database/migrate.ts",
+    "migrate:up": "npm run migrate -- up",
+    "migrate:down": "npm run migrate -- down"
   },
   "jest": {
     "preset": "ts-jest",
