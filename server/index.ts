@@ -1,17 +1,17 @@
-const app = require('express')();
-const server = require('http').createServer(app);
+import { createServer } from 'http';
+import app from 'src/server';
 
+const index = createServer(app);
 
 app.get('/get-presigned-url', (req, res) => {
-
   //  implement fetching of presigned url
   res.status(200).send('all good');
 });
 
-const port = 3000;
+const port = process.env.PORT;
 
-server.listen(port);
+index.listen(port);
 
-server.on('listening', () => {
+index.on('listening', () => {
   console.info(`🚀server is running on port ${port}  ✊🏾✊🏾✊🏾`);
 });

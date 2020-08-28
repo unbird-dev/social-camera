@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "paths": {
+      "src/*": ["src/*"]
+    },
+    "sourceMap": false,
+    "strict": true,
+    "target": "es2019"
+  },
+  "exclude": ["node_modules"]
+}
