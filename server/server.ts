@@ -1,5 +1,8 @@
-const app = require('express')();
-const server = require('http').createServer(app);
+import express from 'express';
+import {createServer} from "http";
+
+const app = express();
+const server = createServer(app);
 
 
 app.get('/get-presigned-url', (req, res) => {
