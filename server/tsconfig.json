@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "downlevelIteration": true,
+    "module": "commonjs",
+    "target": "es2019",
+    "sourceMap": false,
+    "strict": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
