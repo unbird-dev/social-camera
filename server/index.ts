@@ -8,7 +8,7 @@ app.get('/get-presigned-url', (req, res) => {
   res.status(200).send('all good');
 });
 
-const port = 3000;
+const port = process.env.PORT;
 
 index.listen(port);
 
