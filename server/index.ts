@@ -5,9 +5,6 @@ import login from "routes/login";
 
 const index = createServer(app);
 
-app.get('/get-presigned-url', getPresignedUrl);
-app.post('/login', login);
-
 const port = process.env.PORT;
 
 index.listen(port);
