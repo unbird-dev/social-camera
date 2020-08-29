@@ -28,7 +28,11 @@ describe('Token test', () => {
     expect(token.length).toBeGreaterThan(5)
   });
 
-  test('Return true -- when token verified', () => {
-    expect(verifyAccessToken(token)).toBe(true);
+  test('Return email -- when token verified', () => {
+    expect(verifyAccessToken(token)).toBe('test');
+  })
+
+  test('Return false -- when token is invalid', () => {
+    expect(verifyAccessToken('dummy_token')).toBe(false);
   })
 });

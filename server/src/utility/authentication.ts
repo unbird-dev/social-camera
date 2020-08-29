@@ -1,5 +1,5 @@
 import { genSaltSync, hashSync, compareSync } from 'bcrypt';
-import { sign } from "jsonwebtoken";
+import { sign, verify } from 'jsonwebtoken';
 
 export const createHashedPassword = (password: string): string => {
   const salt = genSaltSync(parseInt(process.env.SALT_ROUNDS!));
@@ -14,7 +14,16 @@ export const checkHashedPassword = (
 };
 
 export const generateAccessToken = (email: string): string => {
-  return sign({email}, process.env.JWT_TOKEN_SECRET! as string, { expiresIn: '1200s' })
-}
+  return sign({ email }, process.env.JWT_TOKEN_SECRET! as string, {
+    expiresIn: '1200s'
+  });
+};
 
-export const verifyAccessToken = () => {};
+export const verifyAccessToken = (token: string): string | boolean => {
+  try {
+    const payload = verify(token, process.env.JWT_TOKEN_SECRET!);
+    return (payload as { email: string }).email;
+  } catch (error) {
+    return false;
+  }
+};
