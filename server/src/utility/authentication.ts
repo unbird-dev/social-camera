@@ -14,5 +14,7 @@ export const checkHashedPassword = (
 };
 
 export const generateAccessToken = (email: string): string => {
-  return sign(email, process.env.JWT_TOKEN_SECRET!, { expiresIn: '3600s' })
+  return sign({email}, process.env.JWT_TOKEN_SECRET! as string, { expiresIn: '1200s' })
 }
+
+export const verifyAccessToken = () => {};
