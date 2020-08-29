@@ -14,8 +14,8 @@ export const checkHashedPassword = (
   return compareSync(password, hashedPassword);
 };
 
-export const generateAccessToken = (id: number): string => {
-  return sign({ id }, process.env.JWT_TOKEN_SECRET! as string, {
+export const generateAccessToken = (user: {id: number, name: string, email: string}): string => {
+  return sign(user, process.env.JWT_TOKEN_SECRET! as string, {
     expiresIn: '1200s'
   });
 };

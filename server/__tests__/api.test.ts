@@ -10,11 +10,18 @@ describe('S3 apis', () => {
   });
 
   test('Allow access (200) -- when authorised.', (done) => {
-    const token = generateAccessToken(1);
+    const token = generateAccessToken({
+      id: 1,
+      email: 'test@gmail.com',
+      name: 'tester'
+    });
+
     testApp
       .get('/get-presigned-url')
       .set('Authorization', 'Bearer ' + token)
-      .expect(200, done);
+      .then((response) => {
+        if(response.body) done();
+      });
   });
 });
 

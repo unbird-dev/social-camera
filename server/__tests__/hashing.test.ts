@@ -1,8 +1,9 @@
 import {
   createHashedPassword,
   checkHashedPassword,
-  generateAccessToken, verifyAccessToken
-} from "src/utility/authentication";
+  generateAccessToken,
+  verifyAccessToken
+} from 'src/utility/authentication';
 
 describe('Hashing test', () => {
   const password = 'testPassword';
@@ -22,17 +23,21 @@ describe('Hashing test', () => {
 });
 
 describe('Token test', () => {
-  const token = generateAccessToken('test');
+  const token = generateAccessToken({
+    id: 1,
+    name: 'test',
+    email: 'test@gmail.com'
+  });
 
   test('Create token', () => {
-    expect(token.length).toBeGreaterThan(5)
+    expect(token.length).toBeGreaterThan(5);
   });
 
   test('Return email -- when token verified', () => {
     expect(verifyAccessToken(token)).toBe('test');
-  })
+  });
 
   test('Return false -- when token is invalid', () => {
     expect(verifyAccessToken('dummy_token')).toBe(false);
-  })
+  });
 });

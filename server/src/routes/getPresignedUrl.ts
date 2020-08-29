@@ -3,10 +3,12 @@ import { createPresignedUrl } from 'src/utility/presignedUrl';
 
 const getPresignedUrl: RequestHandler = (request, response) => {
   // TODO: Check if necessary ?.
-  if (response.locals.id) response.status(200).send('all good');
+  if (response.locals.id) {
+    const pre = createPresignedUrl({ name: 'test' });
 
-  const pre = createPresignedUrl({ name: 'test' });
-  console.log(pre);
+    response.status(200).send({url: `${pre.url}/${pre.fields.key}`});
+  }
+
   response.status(401);
 };
 
