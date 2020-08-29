@@ -10,23 +10,33 @@ export const userAttributes: ModelAttributes = {
   },
   latestImage: {
     type: Sequelize.STRING(256),
-    allowNull: true
+    allowNull: true,
+    validate: {
+      isUrl: true
+    }
   },
   hashedPassword: {
     type: Sequelize.STRING(128),
     allowNull: false,
     set(password: string): void {
       this.setDataValue('hashedPassword', password);
-    }
+    },
   },
   name: {
     type: Sequelize.STRING(128),
-    allowNull: false
+    allowNull: false,
+    validate: {
+      isAlphanumeric: true,
+      len: [3, 128]
+    }
   },
   email: {
     unique: true,
     allowNull: false,
-    type: Sequelize.STRING(128)
+    type: Sequelize.STRING(128),
+    validate: {
+      isEmail: true
+    }
   }
 };
 

@@ -1,7 +1,7 @@
 import { User } from 'src/database/models/user';
 import { sequelize } from 'src/database/engine';
 
-describe('User Creation', () => {
+describe('User Creation Test', () => {
   beforeAll(async () => {
     await sequelize.authenticate();
   });
