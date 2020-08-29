@@ -15,6 +15,7 @@ export const userAttributes: ModelAttributes = {
       isUrl: true
     }
   },
+  // TODO: encryption here ?
   hashedPassword: {
     type: Sequelize.STRING(128),
     allowNull: false,

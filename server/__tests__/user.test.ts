@@ -23,7 +23,6 @@ describe('User Creation Test', () => {
         throw new Error('User was create without a name');
       })
       .catch((error) => {
-        // console.log(error.message)
         expect(error.message).toContain('name cannot be null');
         done();
       });
