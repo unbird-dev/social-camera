@@ -95,5 +95,33 @@ describe('Authentication', () => {
           done()
         });
     });
+
+    test('Return 422, User -- when name is missing.',  async (done) => {
+      testApp
+        .post('/signup')
+        .set('Accept', 'application/json')
+        .send({
+          email: 'tester@gmail.com',
+          password: 'password'
+        })
+        .then((response) => {
+          expect(response.status).toBe(422);
+          done()
+        });
+    });
+
+    test('Return 422, User -- when email is missing.',  async (done) => {
+      testApp
+        .post('/signup')
+        .set('Accept', 'application/json')
+        .send({
+          name: 'tester',
+          password: 'password'
+        })
+        .then((response) => {
+          expect(response.status).toBe(422);
+          done()
+        });
+    });
   });
 });

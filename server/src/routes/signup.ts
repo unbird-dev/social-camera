@@ -20,8 +20,6 @@ const signup: RequestHandler = (request, response) => {
       .send({ error: `Missing fields: ${missing.join(', ')}` });
   }
 
-  console.log('still?');
-
   User.create({
     name,
     email,
