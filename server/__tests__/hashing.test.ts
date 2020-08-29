@@ -33,7 +33,7 @@ describe('Token test', () => {
   });
 
   test('Return email -- when token verified', () => {
-    expect(verifyAccessToken(token)).toBe('test');
+    expect(verifyAccessToken(token)).toBe(1);
   });
 
   test('Return false -- when token is invalid', () => {

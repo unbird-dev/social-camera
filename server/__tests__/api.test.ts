@@ -67,7 +67,7 @@ describe('Authentication', () => {
       tester?.destroy();
     });
 
-    test('Return Token, User -- when successfully signed up', () => {
+    test('Return Token, User -- when successfully signed up', async (done) => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
@@ -78,6 +78,21 @@ describe('Authentication', () => {
         })
         .then((response) => {
           expect(response.status).toBe(200);
+          done()
+        });
+    });
+
+    test('Return 422, User -- when password is missing.', (done) => {
+      testApp
+        .post('/signup')
+        .set('Accept', 'application/json')
+        .send({
+          name: 'tester',
+          email: 'tester@gmail.com',
+        })
+        .then((response) => {
+          expect(response.status).toBe(422);
+          done()
         });
     });
   });
