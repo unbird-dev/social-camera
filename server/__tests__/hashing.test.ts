@@ -26,7 +26,6 @@ describe('Token test', () => {
   const token = generateAccessToken({
     id: 1,
     name: 'test',
-    email: 'test@gmail.com'
   });
 
   test('Create token', () => {

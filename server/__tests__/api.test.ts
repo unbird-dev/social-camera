@@ -5,6 +5,7 @@ import FormData from 'form-data';
 import { createReadStream } from 'fs';
 import { resolve } from 'path';
 import url from 'url';
+import { sequelize } from "src/database/engine";
 
 const testApp = supertest(app);
 
@@ -16,7 +17,6 @@ describe('S3 apis', () => {
   test('Allow access (200) -- when authorised.', () => {
     const token = generateAccessToken({
       id: 1,
-      email: 'test@gmail.com',
       name: 'tester'
     });
 
@@ -38,12 +38,11 @@ describe('S3 apis', () => {
             hostname,
             port,
             path,
-            method: "PUT"
+            method: 'PUT'
           },
           (error, response) => {
             response.resume();
-
-            expect(response.statusCode).toBe(200)
+            expect(response.statusCode).toBe(200);
           }
         );
       });
@@ -51,9 +50,24 @@ describe('S3 apis', () => {
 });
 
 describe('Authentication', () => {
-  describe('POST /signup', () => {
+  beforeAll(()=> {
+    sequelize.authenticate()
+  })
+
+  describe('Return Token -- when signed up successfully', () => {
     test('Wrong Fields', (done) => {
-      testApp.post('/signup').expect(200, done);
+      testApp
+        .post('/signup')
+        .set('Accept', 'application/json')
+        .send({
+          name: 'tester',
+          email: 'tester@gmil.com',
+          password: 'password'
+        })
+        .then((response) => {
+          console.log(response.body);
+          done();
+        });
     });
   });
 });

@@ -1,6 +1,18 @@
-import Sequelize, { ModelAttributes } from 'sequelize';
+import Sequelize, { Model, ModelAttributes, Optional } from 'sequelize';
 import { sequelize } from 'src/database/engine';
-import { createHashedPassword } from "src/utility/authentication";
+import { createHashedPassword } from 'src/utility/authentication';
+
+export interface UserAttributes {
+  id: number;
+  name: string;
+  email: string;
+  hashedPassword: string;
+  latestImage?: string;
+}
+
+export interface UserInstance
+  extends Model<UserAttributes, Optional<UserAttributes, 'id'>>,
+    UserAttributes {}
 
 export const userAttributes: ModelAttributes = {
   id: {
@@ -22,7 +34,7 @@ export const userAttributes: ModelAttributes = {
     allowNull: false,
     set(password: string): void {
       this.setDataValue('hashedPassword', createHashedPassword(password));
-    },
+    }
   },
   name: {
     type: Sequelize.STRING(128),
@@ -42,4 +54,4 @@ export const userAttributes: ModelAttributes = {
   }
 };
 
-export const User = sequelize.define('user', userAttributes, );
+export const User = sequelize.define<UserInstance>('user', userAttributes);
