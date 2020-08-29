@@ -8,11 +8,19 @@ import {
 const signup: RequestHandler = (request, response) => {
   const { name, email, password } = request.body;
 
-  if (!name || !email || !password) {
-    return response.status(422).send('Missing fields');
+  const missing = [
+    !name && 'name',
+    !email && 'email',
+    !password && 'password'
+  ].filter((value) => value !== false);
+
+  if (missing.length > 0) {
+    return response
+      .status(422)
+      .send({ error: `Missing fields: ${missing.join(', ')}` });
   }
 
-  console.log('still?')
+  console.log('still?');
 
   User.create({
     name,

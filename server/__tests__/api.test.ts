@@ -82,7 +82,7 @@ describe('Authentication', () => {
         });
     });
 
-    test('Return 422, User -- when password is missing.', (done) => {
+    test('Return 422, User -- when password is missing.',  async (done) => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
