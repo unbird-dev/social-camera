@@ -1,5 +1,5 @@
 import Sequelize, { QueryInterface } from 'sequelize';
-import { userAttributes, userTableName } from 'src/database/models/user';
+import { User } from "src/database/models/user";
 
 interface SequelizeInterface {
   queryInterface: QueryInterface;
@@ -8,8 +8,8 @@ interface SequelizeInterface {
 export const up = async ({
   queryInterface
 }: SequelizeInterface): Promise<void> => {
-  await queryInterface.createTable(userTableName, {
-    ...userAttributes,
+  await queryInterface.createTable(User.tableName, {
+    ...User.attributes,
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false
@@ -24,4 +24,4 @@ export const up = async ({
 export const down = async ({
   queryInterface
 }: SequelizeInterface): Promise<void> =>
-  await queryInterface.dropTable(userTableName);
+  await queryInterface.dropTable(User.tableName);

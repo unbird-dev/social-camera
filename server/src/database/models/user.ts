@@ -1,6 +1,7 @@
 import Sequelize, { Model, Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 import { sequelize } from 'src/database/engine';
+import { InitOptions, ModelAttributes, ModelStatic } from "sequelize/types/lib/model";
 
 interface UserAttributes {
   id: number;
@@ -31,33 +32,33 @@ export class User
   async isValidPassword(password: string): Promise<boolean> {
     return await bcrypt.compare(this.password, password);
   }
+
+  static attributes = {
+    id: {
+      autoIncrement: true,
+      primaryKey: true,
+      type: Sequelize.INTEGER.UNSIGNED,
+      unique: true
+    },
+    latestImage: {
+      type: Sequelize.STRING(256),
+      allowNull: true
+    },
+    hashedPassword: {
+      type: Sequelize.STRING(128),
+      allowNull: false
+    },
+    name: {
+      unique: true,
+      type: Sequelize.STRING(128),
+      allowNull: false
+    }
+  };
+
+  static tableName = 'users';
 }
 
-export const userAttributes = {
-  id: {
-    autoIncrement: true,
-    primaryKey: true,
-    type: Sequelize.INTEGER.UNSIGNED,
-    unique: true
-  },
-  latestImage: {
-    type: Sequelize.STRING(256),
-    allowNull: true
-  },
-  hashedPassword: {
-    type: Sequelize.STRING(128),
-    allowNull: false
-  },
-  name: {
-    unique: true,
-    type: Sequelize.STRING(128),
-    allowNull: false
-  }
-};
-
-export const userTableName = 'users';
-
-User.init(userAttributes, {
-  tableName: userTableName,
+User.init(User.attributes, {
+  tableName: User.tableName,
   sequelize
 });
