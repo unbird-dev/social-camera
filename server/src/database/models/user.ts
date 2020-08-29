@@ -1,5 +1,6 @@
 import Sequelize, { ModelAttributes } from 'sequelize';
 import { sequelize } from 'src/database/engine';
+import { createHashedPassword } from "src/utility/hashPassword";
 
 export const userAttributes: ModelAttributes = {
   id: {
@@ -20,7 +21,7 @@ export const userAttributes: ModelAttributes = {
     type: Sequelize.STRING(128),
     allowNull: false,
     set(password: string): void {
-      this.setDataValue('hashedPassword', password);
+      this.setDataValue('hashedPassword', createHashedPassword(password));
     },
   },
   name: {
@@ -41,4 +42,4 @@ export const userAttributes: ModelAttributes = {
   }
 };
 
-export const User = sequelize.define('user', userAttributes);
+export const User = sequelize.define('user', userAttributes, );
