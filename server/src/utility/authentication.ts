@@ -14,7 +14,7 @@ export const checkHashedPassword = (
   return compareSync(password, hashedPassword);
 };
 
-export const generateAccessToken = (id: string): string => {
+export const generateAccessToken = (id: number): string => {
   return sign({ id }, process.env.JWT_TOKEN_SECRET! as string, {
     expiresIn: '1200s'
   });
@@ -37,11 +37,11 @@ export const authenticationMiddleware: RequestHandler = (
   const header = request.headers['authorization'];
   const token = header && header.split(' ')[1];
 
-  if (!token) return response.status(401);
+  if (!token) return response.sendStatus(401);
 
   const id = verifyAccessToken(token);
 
-  if (!id) return response.status(403);
+  if (!id) return response.sendStatus(403);
 
   response.locals.id = id;
   next();
