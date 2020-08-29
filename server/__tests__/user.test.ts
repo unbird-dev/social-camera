@@ -40,6 +40,16 @@ describe('User Creation Test', () => {
       });
   });
 
+  test('Not create a new User -- when email is ill-formatted.', async (done) => {
+    User.create({ name: 'test', hashedPassword: 'password', email: 'hello_world' })
+      .then((user) => {
+        throw new Error('User was created ill-formatted email.');
+      })
+      .catch((error) => {
+        expect(error.message).toContain('Validation isEmail on email failed');
+        done();
+      });
+  })
   test('Not create a new User -- when hashedPassword is omitted.', async (done) => {
     User.create({ name: 'test', email: 'email@gaml.com' })
       .then((user) => {
