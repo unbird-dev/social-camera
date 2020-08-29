@@ -7,6 +7,7 @@ import { resolve } from 'path';
 import url from 'url';
 import { sequelize } from 'src/database/engine';
 import { User } from 'src/database/models/user';
+import { response } from 'express';
 
 const testApp = supertest(app);
 
@@ -55,7 +56,7 @@ describe('Authentication', () => {
     sequelize.authenticate();
   });
 
-  describe('Return Token -- when signed up successfully', () => {
+  describe('Signup', () => {
     beforeAll(async () => {
       const tester = await User.findOne({
         where: {
@@ -66,7 +67,7 @@ describe('Authentication', () => {
       tester?.destroy();
     });
 
-    test('Wrong Fields', (done) => {
+    test('Return Token, User -- when successfully signed up', () => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
@@ -76,8 +77,7 @@ describe('Authentication', () => {
           password: 'password'
         })
         .then((response) => {
-          console.log(response.body);
-          done();
+          expect(response.status).toBe(200);
         });
     });
   });

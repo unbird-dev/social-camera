@@ -14,8 +14,12 @@ const signup: RequestHandler = (request, response) => {
     hashedPassword: createHashedPassword(request.body.password)
   })
     .then((user: UserInstance) => {
-      generateAccessToken({id: user.id, name: user.name});
-      response.status(200).send('Signup Route is working.');
+      response.status(200).send({
+        token: generateAccessToken({ id: user.id, name: user.name }),
+        id: user.id,
+        name: user.name,
+        latestImage: user.latestImage
+      });
     })
     .catch((error) => response.status(409).send(error));
 };
