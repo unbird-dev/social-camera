@@ -5,7 +5,7 @@ export const userAttributes: ModelAttributes = {
   id: {
     autoIncrement: true,
     primaryKey: true,
-    type: Sequelize.INTEGER.UNSIGNED,
+    type: Sequelize.INTEGER,
     unique: true
   },
   latestImage: {
@@ -31,5 +31,3 @@ export const userAttributes: ModelAttributes = {
 };
 
 export const User = sequelize.define('user', userAttributes);
-
-
