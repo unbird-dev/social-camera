@@ -1,7 +1,7 @@
 import { User } from 'src/database/models/user';
 import { sequelize } from 'src/database/engine';
 
-describe('User Model Binding', () => {
+describe('User Creation', () => {
   beforeAll(async () => {
     await sequelize.authenticate();
   });
@@ -17,14 +17,37 @@ describe('User Model Binding', () => {
     });
   });
 
-  // test('Create a user without name', async (done) => {
-  //   User.create({ hashedPassword: 'password', email: 'email2@gmail.com' })
-  //     .then((user) => {
-  //       throw new Error('User was create without a name');
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       expect(error).toHaveProperty('name cannot be null');
-  //     });
-  // });
+  test('Not create a new User -- when name is omitted.', async (done) => {
+    User.create({ hashedPassword: 'password', email: 'email2@gmail.com' })
+      .then((user) => {
+        throw new Error('User was create without a name');
+      })
+      .catch((error) => {
+        // console.log(error.message)
+        expect(error.message).toContain('name cannot be null');
+        done();
+      });
+  });
+
+  test('Not create a new User -- when email is omitted.', async (done) => {
+    User.create({ name: 'test', hashedPassword: 'password' })
+      .then((user) => {
+        throw new Error('User was created without email.');
+      })
+      .catch((error) => {
+        expect(error.message).toContain('email cannot be null');
+        done();
+      });
+  });
+
+  test('Not create a new User -- when hashedPassword is omitted.', async (done) => {
+    User.create({ name: 'test', email: 'email@gaml.com' })
+      .then((user) => {
+        throw new Error('User was created without hashedPassword.');
+      })
+      .catch((error) => {
+        expect(error.message).toContain('hashedPassword cannot be null');
+        done();
+      });
+  });
 });
