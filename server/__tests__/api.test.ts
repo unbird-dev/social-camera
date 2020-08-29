@@ -5,7 +5,8 @@ import FormData from 'form-data';
 import { createReadStream } from 'fs';
 import { resolve } from 'path';
 import url from 'url';
-import { sequelize } from "src/database/engine";
+import { sequelize } from 'src/database/engine';
+import { User } from 'src/database/models/user';
 
 const testApp = supertest(app);
 
@@ -50,18 +51,28 @@ describe('S3 apis', () => {
 });
 
 describe('Authentication', () => {
-  beforeAll(()=> {
-    sequelize.authenticate()
-  })
+  beforeAll(() => {
+    sequelize.authenticate();
+  });
 
   describe('Return Token -- when signed up successfully', () => {
+    beforeAll(async () => {
+      const tester = await User.findOne({
+        where: {
+          name: 'tester',
+          email: 'tester@gmail.com'
+        }
+      });
+      tester?.destroy();
+    });
+
     test('Wrong Fields', (done) => {
       testApp
         .post('/signup')
         .set('Accept', 'application/json')
         .send({
           name: 'tester',
-          email: 'tester@gmil.com',
+          email: 'tester@gmail.com',
           password: 'password'
         })
         .then((response) => {

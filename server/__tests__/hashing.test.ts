@@ -25,7 +25,7 @@ describe('Hashing test', () => {
 describe('Token test', () => {
   const token = generateAccessToken({
     id: 1,
-    name: 'test',
+    name: 'tester',
   });
 
   test('Create token', () => {
