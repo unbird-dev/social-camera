@@ -1,5 +1,5 @@
 import Sequelize, { QueryInterface } from 'sequelize';
-import { User } from "src/database/models/user";
+import { User, userAttributes } from "src/database/models/user";
 
 interface SequelizeInterface {
   queryInterface: QueryInterface;
@@ -9,7 +9,7 @@ export const up = async ({
   queryInterface
 }: SequelizeInterface): Promise<void> => {
   await queryInterface.createTable(User.tableName, {
-    ...User.attributes,
+    ...userAttributes,
     createdAt: {
       type: Sequelize.DATE,
       allowNull: false
