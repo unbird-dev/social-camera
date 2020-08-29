@@ -1,6 +1,6 @@
-import { routeType } from 'routes/routeType';
+import { RequestHandler } from "express";
 
-const login: routeType = (request, response) => {
+const login: RequestHandler = (request, response) => {
   response.status(200).send('Login Route is working.');
 };
 

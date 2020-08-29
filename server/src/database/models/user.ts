@@ -1,6 +1,6 @@
 import Sequelize, { ModelAttributes } from 'sequelize';
 import { sequelize } from 'src/database/engine';
-import { createHashedPassword } from "src/utility/hashPassword";
+import { createHashedPassword } from "src/utility/authentication";
 
 export const userAttributes: ModelAttributes = {
   id: {

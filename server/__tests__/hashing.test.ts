@@ -1,4 +1,4 @@
-import { createHashedPassword, checkHashedPassword } from "src/utility/hashPassword";
+import { createHashedPassword, checkHashedPassword } from "src/utility/authentication";
 
 describe('Hashing test', () => {
   const password = 'testPassword';

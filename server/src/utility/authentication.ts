@@ -1,4 +1,5 @@
 import { genSaltSync, hashSync, compareSync } from 'bcrypt';
+import { RequestHandler } from 'express';
 
 export const createHashedPassword = (password: string): string => {
   const salt = genSaltSync(parseInt(process.env.SALT_ROUNDS!));
@@ -11,3 +12,9 @@ export const checkHashedPassword = (
 ): boolean => {
   return compareSync(password, hashedPassword);
 };
+
+export const authenticateToken: RequestHandler = (
+  request,
+  response,
+  next
+) => {};

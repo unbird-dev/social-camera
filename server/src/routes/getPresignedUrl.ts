@@ -1,6 +1,6 @@
-import { routeType } from 'routes/routeType';
+import { RequestHandler } from "express";
 
-const getPresignedUrl: routeType = (request, response) => {
+const getPresignedUrl: RequestHandler = (request, response) => {
   response.status(200).send('all good');
 };
 
