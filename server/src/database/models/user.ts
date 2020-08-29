@@ -9,7 +9,7 @@ interface UserAttributes {
   latestImage: string;
 }
 
-class User
+export class User
   extends Model<UserAttributes, Optional<UserAttributes, 'id'>>
   implements UserAttributes {
   id!: number;
@@ -17,11 +17,11 @@ class User
   hashedPassword!: string;
   latestImage!: string;
 
-  get password() {
+  get password(): string {
     return this.hashedPassword;
   }
 
-  async setPassword(password: string) {
+  async setPassword(password: string): Promise<void> {
     this.hashedPassword = await bcrypt.hash(password, process.env.SALT_ROUNDS!);
   }
 

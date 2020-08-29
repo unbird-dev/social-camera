@@ -5,7 +5,9 @@ interface SequelizeInterface {
   queryInterface: QueryInterface;
 }
 
-export const up = async ({ queryInterface }: SequelizeInterface) => {
+export const up = async ({
+  queryInterface
+}: SequelizeInterface): Promise<void> => {
   await queryInterface.createTable(userTableName, {
     ...userAttributes,
     createdAt: {
@@ -19,6 +21,7 @@ export const up = async ({ queryInterface }: SequelizeInterface) => {
   });
 };
 
-export const down = async ({ queryInterface }: SequelizeInterface) => {
+export const down = async ({
+  queryInterface
+}: SequelizeInterface): Promise<void> =>
   await queryInterface.dropTable(userTableName);
-};
