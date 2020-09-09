@@ -22,6 +22,7 @@ Implementation Details:
 5. Update the client app with the s3 link
 6. Allow users to save the created snapshot
 7. Testing is not required but a plus
+8. Use naitve browser API for capuring user.
 
 Dev Notes:
 - All react components must be 100% react hooks
